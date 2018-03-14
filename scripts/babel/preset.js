@@ -8,10 +8,10 @@
 // It’s also nice that we can enforce `NODE_ENV` being specified.
 var env = process.env.BABEL_ENV || process.env.NODE_ENV;
 
-module.exports = {
+module.exports = () => ({
   presets: [
     [
-      'env',
+      '@babel/preset-env',
       env === 'test'
         ? {
             targets: {
@@ -24,7 +24,7 @@ module.exports = {
     ]
   ],
   plugins: [
-    ['transform-object-rest-spread', { useBuiltIns: true }],
+    ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
     require.resolve('./transform-object-assign-require')
   ]
-};
+});
